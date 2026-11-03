@@ -1,0 +1,68 @@
+/* 1QADAM — QR беттері (телефонға арналған, 9:16) */
+:root{--bg:#F7F5F1;--paper:#FFFFFF;--ink:#17140F;--mute:#5E5850;--line:#E4DFD6;--line2:#D6D0C5;--acc:#B8431A;--acc-d:#9A3713;--gold:#E9A04A}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#E9E4DB;color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5;min-height:100vh;min-height:100dvh;display:flex;justify-content:center;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+h1,p,ul,blockquote{margin:0}
+ul{padding:0;list-style:none}
+:focus-visible{outline:3px solid var(--acc);outline-offset:3px;border-radius:6px}
+[hidden]{display:none!important}
+
+.page{width:100%;max-width:440px;min-height:100vh;min-height:100dvh;background:var(--bg);padding:max(16px,env(safe-area-inset-top)) 18px max(24px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:14px}
+
+.top{display:flex;justify-content:space-between;align-items:center;min-height:44px}
+.logo{display:flex;align-items:center;min-height:44px;padding-right:8px}
+.logo img{width:110px}
+.pos{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--mute);font-variant-numeric:tabular-nums;border:1.5px solid var(--line2);border-radius:999px;padding:6px 12px}
+
+.head{display:flex;align-items:flex-end;gap:14px;margin-top:4px}
+.num{font-size:clamp(88px,30vw,120px);font-weight:800;line-height:.78;letter-spacing:-.06em;color:var(--acc);font-variant-numeric:tabular-nums}
+.meta{display:flex;flex-direction:column;gap:6px;padding-bottom:4px;min-width:0}
+.week{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.by{font-size:13px;color:var(--mute)}
+.by b{color:var(--ink);font-weight:700}
+
+.ttl{font-size:clamp(22px,6.4vw,28px);line-height:1.15;letter-spacing:-.02em;font-weight:800}
+
+.video{position:relative;background:var(--ink);border-radius:20px;padding:8px;min-height:min(62vh,520px);display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.video iframe{border-radius:14px!important;width:100%!important;min-width:0!important;background:#fff}
+.loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#C9C2B6;font-size:14px;font-weight:600}
+.spin{width:34px;height:34px;border-radius:50%;border:3px solid rgba(247,245,241,.2);border-top-color:var(--gold);animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.video.ready .loading{display:none}
+
+/* «жақында» күйі */
+.soon{color:var(--bg);text-align:center;padding:28px 18px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.soon-badge{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--gold);border-radius:999px;padding:6px 12px}
+.soon h2{margin:0;font-size:22px;line-height:1.2;letter-spacing:-.02em}
+.soon p{font-size:15px;line-height:1.55;color:#C9C2B6;max-width:300px}
+.soon a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:12px;border:1.5px solid var(--bg);font-weight:700;font-size:14px}
+.soon a:hover{background:var(--bg);color:var(--ink)}
+
+.alt{text-align:center;font-size:13px;color:var(--mute)}
+.alt a{display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+
+.quote{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:14px;padding:16px 16px 16px 18px;font-size:16px;line-height:1.55;font-weight:500}
+
+.actions{display:grid;grid-template-columns:1.25fr 1fr;gap:8px;margin-top:auto;padding-top:4px}
+.btn{display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:14px;font-weight:700;font-size:15px;border:1.5px solid var(--ink);padding:0 12px;text-align:center;line-height:1.2}
+.btn.main{background:var(--acc);border-color:var(--acc);color:#fff}
+.btn.main:hover{background:var(--acc-d)}
+.btn:not(.main):hover{background:var(--ink);color:var(--bg)}
+.prev{align-self:center;display:inline-flex;align-items:center;min-height:44px;padding:0 10px;font-size:14px;font-weight:600;color:var(--mute)}
+
+.soc{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;border-top:1px solid var(--line);padding-top:6px}
+.soc a{display:flex;align-items:center;justify-content:center;min-height:44px;font-size:13px;font-weight:700;color:var(--mute);border-radius:10px}
+.soc a:hover{color:var(--ink);background:#EFEBE4}
+.slogan{text-align:center;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--acc)}
+
+@media (max-width:359px){.actions{grid-template-columns:1fr}.soc{grid-template-columns:repeat(2,1fr)}}
+/* компьютерде — телефон пішіндес 9:16 карта */
+@media (min-width:600px){
+  body{align-items:center;padding:32px 0}
+  .page{min-height:0;aspect-ratio:9/16;max-height:calc(100vh - 64px);min-height:780px;border-radius:32px;box-shadow:0 30px 80px -20px rgba(23,20,15,.35);overflow-y:auto;padding:22px 22px 24px}
+  .video{min-height:420px}
+}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}
