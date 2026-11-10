@@ -15,6 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/shelf.css">
 </head>
 <body>
 <a class="skip" href="#main">Негізгі мазмұнға өту</a>
@@ -111,41 +112,39 @@
       </li>
     </ol>
 
-    <h3 class="sub-h">Беттерден үлгі</h3>
-    <p class="sub-lead">Суретті басып, үлкейтіп көр.</p>
-    <div class="pages">
-      <article class="page-card">
-        <button class="zoom" type="button" data-src="assets/images/pages/oath.jpg" data-alt="«Менің сертім» беті"><img src="assets/images/pages/oath.jpg" alt="«Менің сертім» беті" width="819" height="1158" loading="lazy"></button>
-        <h4>Менің сертім</h4>
-        <p>Күнделік оқудан емес, өзіңмен жасалған келісімнен басталады. Мақсат балың, оқу орның, қолың мен күнің. «Қолым — менің сөзімнің куәсі.»</p>
-      </article>
-      <article class="page-card">
-        <button class="zoom" type="button" data-src="assets/images/pages/strategy.jpg" data-alt="«Менің ҰБТ стратегиям» беті"><img src="assets/images/pages/strategy.jpg" alt="«Менің ҰБТ стратегиям» беті" width="819" height="1158" loading="lazy"></button>
-        <h4>Менің ҰБТ стратегиям</h4>
-        <p>Негізгі мақсат пен минималды нысан, қалған уақыт және әр пәннен күтілетін балл. 100 балл беретін екі бейіндік пәнге басымдық.</p>
-      </article>
-      <article class="page-card">
-        <button class="zoom" type="button" data-src="assets/images/pages/week-day.jpg" data-alt="Аптаның бірінші күндері"><img src="assets/images/pages/week-day.jpg" alt="Аптаның бірінші күндері" width="819" height="1158" loading="lazy"></button>
-        <h4>Күн сайынғы бет</h4>
-        <p>Үш міндет, бір тақырып, қанша минут және бір әдет. Күн соңында — белгі: орындалды ма, жоқ па.</p>
-      </article>
-      <article class="page-card">
-        <button class="zoom" type="button" data-src="assets/images/pages/green-box.jpg" data-alt="Жасыл шаршы мен QR-код бар бет"><img src="assets/images/pages/green-box.jpg" alt="Жасыл шаршы мен QR-код бар бет" width="819" height="1158" loading="lazy"></button>
-        <h4>Жасыл шаршылар мен QR</h4>
-        <p>Әр аптада міндетті үш пәннен бір ереже: формула, дата, тәсіл. Аптаның соңында — QR арқылы ашылатын бейне.</p>
-      </article>
-      <article class="page-card">
-        <button class="zoom" type="button" data-src="assets/images/pages/progress.jpg" data-alt="Прогресс парағы"><img src="assets/images/pages/progress.jpg" alt="Прогресс парағы" width="819" height="1158" loading="lazy"></button>
-        <h4>Прогресс парағы</h4>
-        <p>14 жол — 14 сынақ тест. Әр пәннің балы бір кестеде. «Алға жылжып жатырмын ба?» деген сұраққа жауап — сезім емес, сан.</p>
-      </article>
-      <article class="page-card">
-        <button class="zoom" type="button" data-src="assets/images/pages/reflection.jpg" data-alt="Апта рефлексиясы беті"><img src="assets/images/pages/reflection.jpg" alt="Апта рефлексиясы беті" width="819" height="1158" loading="lazy"></button>
-        <h4>Апта рефлексиясы</h4>
-        <p>Мақтау емес, адал сұрақтар: не істедім, не істемедім, өзім туралы не түсіндім. «Прогресс — шындықты мойындаудан басталады.»</p>
-      </article>
-    </div>
+  </div>
 
+  <!-- КҮНДЕЛІК БЕТТЕРІ: 3D сөре (js/shelf.js, деректер config.js → pages) -->
+  <div class="shelf" id="pagesShelf">
+    <div class="wrap shelf-head">
+      <div>
+        <h3 class="sub-h">Беттерден үлгі</h3>
+        <p class="sub-lead">Сөрені сырғыт немесе бөлімді таңда. Ортадағы бетті бас — ол туралы толық ақпарат ашылады.</p>
+      </div>
+    </div>
+    <nav class="shelf-tabs" aria-label="Күнделік бөлімдері">
+      <span class="shelf-ind" aria-hidden="true"></span>
+      <button type="button" data-part="all">Барлығы</button>
+      <button type="button" data-part="start">Бастау</button>
+      <button type="button" data-part="weeks">14 апта</button>
+      <button type="button" data-part="final">Финал</button>
+    </nav>
+    <section class="shelf-view" tabindex="0" aria-label="Күнделік беттерінің сөресі. Таңдау үшін солға және оңға бағыттауыштарды, ашу үшін Enter пернесін бас.">
+      <div class="shelf-stage"></div>
+    </section>
+    <button class="shelf-open" type="button" aria-label="Бетті ашу" tabindex="-1"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 2v14M2 9h14"/></svg></button>
+    <div class="shelf-cap" aria-live="polite">
+      <div class="cap-m cap-sub"></div>
+      <div class="cap-m cap-title"></div>
+      <div class="cap-m cap-tag"></div>
+    </div>
+    <button class="shelf-arr prev" type="button" aria-label="Алдыңғы бет"><svg viewBox="0 0 18 10" aria-hidden="true"><path d="M5 1 1 5l4 4M1 5h16"/></svg></button>
+    <button class="shelf-arr next" type="button" aria-label="Келесі бет"><svg viewBox="0 0 18 10" aria-hidden="true"><path d="m13 1 4 4-4 4M17 5H1"/></svg></button>
+    <div class="shelf-grain" aria-hidden="true"></div>
+    <div class="shelf-cursor" aria-hidden="true"><span class="ring"></span><span class="dot"></span><span class="lbl">Ашу</span></div>
+  </div>
+
+  <div class="wrap">
     <div class="feature-band">
       <div class="fb-text">
         <h3>Жасыл шаршылар — қалтадағы заңды шпаргалка</h3>
@@ -376,7 +375,49 @@
   <img id="viewerImg" src="" alt="">
 </dialog>
 
+<div class="pg-detail" id="pgDetail" role="dialog" aria-modal="true" aria-labelledby="pgdTitle" aria-hidden="true">
+  <div class="pgd-bar">
+    <button class="pgd-close" type="button">Жабу ✕</button>
+    <img class="pgd-logo" src="assets/images/logo-ink.png" alt="1QADAM" width="140" height="31">
+    <span class="pgd-count"></span>
+  </div>
+  <div class="pgd-grid">
+    <div class="pgd-text">
+      <div class="m"><p class="pgd-sub"></p></div>
+      <div class="m"><h3 class="pgd-title" id="pgdTitle"></h3></div>
+      <div class="m"><p class="pgd-meta"></p></div>
+      <div class="m"><p class="pgd-desc"></p></div>
+      <div class="m"><blockquote class="pgd-quote"></blockquote></div>
+      <div class="m"><div class="pgd-fill-wrap"><p class="pgd-fill-h">Бұл бетте не толтырасың</p><ul class="pgd-fill"></ul></div></div>
+      <div class="m"><div class="pgd-cta"><a class="btn btn-acc pgd-order" href="#order">Тапсырыс беру</a><button class="btn btn-line pgd-zoom" type="button">Бетті үлкейтіп көру</button></div></div>
+    </div>
+    <div class="pgd-poster">
+      <svg viewBox="0 0 819 1158" aria-hidden="true">
+        <defs>
+          <filter id="pgdBleed" x="-30%" y="-30%" width="160%" height="160%">
+            <feTurbulence type="fractalNoise" baseFrequency=".011" numOctaves="3" seed="7" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="150" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+          <mask id="pgdMask" maskUnits="userSpaceOnUse" x="-300" y="-300" width="1419" height="1758">
+            <g id="pgdInk" filter="url(#pgdBleed)" fill="#fff">
+              <circle cx="259" cy="425" r="0"/><circle cx="587" cy="772" r="0"/><circle cx="432" cy="154" r="0"/>
+              <circle cx="156" cy="978" r="0"/><circle cx="691" cy="322" r="0"/><circle cx="449" cy="1107" r="0"/>
+              <circle cx="397" cy="605" r="0"/>
+            </g>
+          </mask>
+        </defs>
+        <g mask="url(#pgdMask)">
+          <rect width="819" height="1158" fill="#fff"/>
+          <image id="pgdImg" href="" x="0" y="0" width="819" height="1158" preserveAspectRatio="none"/>
+        </g>
+        <rect x=".5" y=".5" width="818" height="1157" fill="none" stroke="#E4DFD6" mask="url(#pgdMask)"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
 <script src="config.js"></script>
 <script src="js/main.js"></script>
+<script src="js/shelf.js"></script>
 </body>
 </html>
