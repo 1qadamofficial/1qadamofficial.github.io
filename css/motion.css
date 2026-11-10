@@ -1,0 +1,64 @@
+/* 1QADAM — қозғалыс қабаты (js/motion.js).
+   Идеялар Motionsites Academy сабақтарынан алынып, 1QADAM стиліне бейімделді:
+   кезекпен шығатын блоктар, hero параллаксы, курсорға еретін мұқаба, шыны «пилюля» мәзір.
+   Бәрі тек transform/opacity арқылы жасалады, сондықтан телефонда жеңіл.
+   Өшіру үшін: index.html ішінен motion.css пен motion.js жолдарын алып таста. */
+
+/* ---- 1. Кезекпен шығу (scroll reveal) ---- */
+html.mo .rv{opacity:0;transform:translate3d(0,28px,0);filter:blur(6px);
+  transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1),filter .8s;
+  transition-delay:calc(var(--d,0) * 90ms)}
+html.mo .rv.in{opacity:1;transform:none;filter:none}
+@media (max-width:640px){html.mo .rv{filter:none;transform:translate3d(0,18px,0)}}
+
+/* ---- 2. Hero тақырыбы: жолдар бұлдырдан шығады ---- */
+html.mo .hero h1 .ln{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+html.mo .hero h1 .ln>span{display:inline-block;transform:translate3d(0,105%,0);opacity:0;filter:blur(8px);
+  transition:transform 1s cubic-bezier(.16,.84,.24,1),opacity .9s,filter .9s;transition-delay:calc(120ms + var(--d,0) * 120ms)}
+html.mo.ready .hero h1 .ln>span{transform:none;opacity:1;filter:none}
+html.mo .hero .kicker,html.mo .hero .lead,html.mo .hero .cta,html.mo .hero-note{opacity:0;transform:translate3d(0,14px,0);transition:opacity .8s,transform .8s cubic-bezier(.2,.7,.2,1)}
+html.mo .hero .lead{transition-delay:.55s}
+html.mo .hero .cta{transition-delay:.7s}
+html.mo .hero-note{transition-delay:.85s}
+html.mo.ready .hero .kicker,html.mo.ready .hero .lead,html.mo.ready .hero .cta,html.mo.ready .hero-note{opacity:1;transform:none}
+
+/* «PRIME» сөзі: акцент түсінен алтын жылтыр өтеді */
+.hero h1 em{background:linear-gradient(100deg,var(--acc) 0%,var(--acc) 35%,var(--gold) 50%,var(--acc) 65%,var(--acc) 100%);
+  background-size:250% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:mo-shine 5.5s ease-in-out 1.4s infinite}
+@keyframes mo-shine{0%{background-position:100% 0}45%,100%{background-position:0 0}}
+
+/* ---- 3. Hero суреті: параллакс + курсорға ілесу ---- */
+.hero-art{--px:0;--py:0;--sy:0}
+.hero-art .cover{transform:translate3d(calc(var(--px) * 14px),calc(var(--sy) * -40px + var(--py) * 10px),0) rotate(calc(-3deg + var(--px) * 2deg)) translateX(-14%);will-change:transform}
+.hero-art .hero-page{transform:translate3d(calc(var(--px) * -8px),calc(var(--sy) * 30px + var(--py) * -6px),0) rotate(calc(5deg + var(--px) * -1.5deg)) translateX(30%);will-change:transform}
+@media (max-width:900px){
+  .hero-art .hero-page{transform:translate3d(0,calc(var(--sy) * 24px),0) rotate(5deg) translateX(34%)}
+  .hero-art .cover{transform:translate3d(0,calc(var(--sy) * -28px),0) rotate(-3deg) translateX(-14%)}
+}
+html.mo .hero-art{opacity:0;transform:translate3d(0,24px,0) scale(.97);transition:opacity 1s .25s,transform 1.2s .25s cubic-bezier(.16,.84,.24,1)}
+html.mo.ready .hero-art{opacity:1;transform:none}
+
+/* ---- 4. Шыны «пилюля» мәзір (бет жылжығанда, компьютерде) ---- */
+@media (min-width:901px){
+  .site-head{transition:background .3s,border-color .3s}
+  .site-head .nav{transition:margin .35s cubic-bezier(.2,.7,.2,1),min-height .35s,padding .35s,border-color .35s,background .35s,box-shadow .35s;border:1.5px solid transparent;border-radius:999px}
+  .site-head.scrolled{background:transparent;border-bottom-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .site-head.scrolled .nav{margin-top:10px;min-height:60px;max-width:calc(var(--wrap) - 80px);padding:0 8px 0 22px;
+    background:rgba(247,245,241,.86);border-color:var(--ink);box-shadow:0 14px 30px -18px rgba(23,20,15,.35)}
+  @supports (backdrop-filter:blur(8px)){.site-head.scrolled .nav{background:rgba(247,245,241,.72);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2)}}
+}
+/* Телефон мәзірі: сілтемелер кезекпен сырғып шығады */
+@media (max-width:900px){
+  .nav-links.open a{animation:mo-in .45s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * 45ms)}
+}
+@keyframes mo-in{from{opacity:0;transform:translate3d(-14px,0,0)}to{opacity:1;transform:none}}
+
+/* ---- 5. Сандар санап шығады ---- */
+.stats dd{font-variant-numeric:tabular-nums}
+
+@media (prefers-reduced-motion:reduce){
+  html.mo .rv,html.mo .hero h1 .ln>span,html.mo .hero .kicker,html.mo .hero .lead,html.mo .hero .cta,html.mo .hero-note,html.mo .hero-art{opacity:1!important;transform:none!important;filter:none!important}
+  .hero h1 em{animation:none;background-position:0 0}
+  .nav-links.open a{animation:none}
+}
